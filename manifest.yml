@@ -1,0 +1,9 @@
+---
+name: Stata
+category: Interactive Apps
+subcategory: Stata
+role: batch_connect
+description: |
+  This app will launch stata on one or more compute nodes. You
+  will have full access to the resources these nodes provide. This is analogous
+  to an interactive batch job.
