@@ -1,6 +1,6 @@
 <%
   # your image location will differa
-  image="/apps/ondemand/containers/mate_v5.sif"
+  image="/apps/ondemand/containers/mate_v11a.sif"
 %>
 ---
 script:
@@ -27,15 +27,15 @@ batch_connect:
   before_script: |
     # Export the module function if it exists
     [[ $(type -t module) == "function"  ]] && export -f module
-    export my_sport=$(find_port ${host})
-    ssh -f -N -D${my_sport} cl1 
+    #export my_sport=$(find_port ${host})
+    #ssh -f -N -D${my_sport} cl1 
     # Running these here to be included inside the container.
-    echo "DEBUG: SOCKS port is ${my_sport}"
-    DISPLAY=:${display} gsettings set org.gnome.system.proxy mode manual
-    DISPLAY=:${display} gsettings set org.gnome.system.proxy.socks host localhost
-    DISPLAY=:${display} gsettings set org.gnome.system.proxy.socks port ${my_sport}
-    export https_proxy=socks5h://localhost:${my_sport}
-    export http_proxy=socks5h://localhost:${my_sport}
+    #echo "DEBUG: SOCKS port is ${my_sport}"
+    #DISPLAY=:${display} gsettings set org.gnome.system.proxy mode manual
+    #DISPLAY=:${display} gsettings set org.gnome.system.proxy.socks host localhost
+    #DISPLAY=:${display} gsettings set org.gnome.system.proxy.socks port ${my_sport}
+    #export https_proxy=socks5h://localhost:${my_sport}
+    #export http_proxy=socks5h://localhost:${my_sport}
 
   websockify_cmd: '/usr/bin/websockify'
   script_wrapper: |
@@ -47,7 +47,7 @@ batch_connect:
 
     # your bindpath will differ
     mkdir -p /tmp/$USER
-    export SINGULARITY_BINDPATH="/etc/slurm,/etc/ssh,/home,/nfshome,/scratch,/var,/run,/tmp/$USER:/run/user"
+    export SINGULARITY_BINDPATH="/etc/ssh,/home,/nfshome,/scratch,/var,/run,/tmp/$USER:/run/user"
     if [ -e /usr/local/cuda ]
     then
       export SINGULARITY_BINDPATH="$SINGULARITY_BINDPATH,/usr/local/cuda"
